@@ -1,10 +1,11 @@
 import Data from "../../assets/data.json";
 
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import QuizCompleted from "./QuizCompleted";
 import QuizName from "../atoms/Quiz-Name";
 import Button from "../atoms/Button";
 import { ErrorMessage } from "../atoms/Error-Message";
+import {usePersistedState} from '../atoms/Functions'
 
 
 interface props {
@@ -12,19 +13,19 @@ interface props {
   
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const usePersistedState = (key: string,value:any) => {
-  const [state, setState] = useState(() => {
-    const storedValue = localStorage.getItem(key);
-    return storedValue ? JSON.parse(storedValue) : value;
-  });
 
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(state));
-  }, [state, key]);
+// const usePersistedState = (key: string,value:any) => {
+//   const [state, setState] = useState(() => {
+//     const storedValue = localStorage.getItem(key);
+//     return storedValue ? JSON.parse(storedValue) : value;
+//   });
 
-  return [state, setState] as const;
-}
+//   useEffect(() => {
+//     localStorage.setItem(key, JSON.stringify(state));
+//   }, [state, key]);
+
+//   return [state, setState] as const;
+// }
 
 
 

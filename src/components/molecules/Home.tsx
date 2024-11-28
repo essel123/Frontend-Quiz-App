@@ -1,31 +1,17 @@
 import Data from "../../assets/data.json";
-import { useEffect, useState } from "react";
 import Quiz from './Quiz'
-
-
-// type props = {
-//     show: boolean;
-// }
-
+import {usePersistedState} from '../atoms/Functions'
 
 
 function Home() {
-  const [startquiz, setStartQuiz] = useState(() => {
-    const storedState = localStorage.getItem('startquiz');
-    return storedState ? JSON.parse(storedState) : false; // default to false if no value in localStorage
-  });
 
-  const [quizIndex, setQuizIndex] = useState(() => {
-    const storedIndex = localStorage.getItem('quizIndex');
-    return storedIndex ? JSON.parse(storedIndex) : -1; // default to -1 if no value in localStorage
-  });
+  const [startquiz, setStartQuiz] = usePersistedState('startquiz',false)
+  
+
+  const [quizIndex, setQuizIndex] =  usePersistedState('quizIndex',-1)
 
  
-    useEffect(() => {
-      localStorage.setItem('startquiz', JSON.stringify(startquiz));
-      localStorage.setItem('quizIndex', JSON.stringify(quizIndex));
-    }, [startquiz,quizIndex]);
-  
+   
 
   function selectQuiz(index: number) {
     setStartQuiz(!startquiz)
@@ -34,32 +20,7 @@ function Home() {
 
   const quizType = Data.quizzes.map((data, index) => {
     return (
-      <li
-        key={index}
-        onClick={() => {
-          selectQuiz(index);
-         
-        
-        }}
-      >
-        
-
-        <span style={{
-            background:
-              index === 0
-                ? "#FFF1E9"
-                : index === 1 ? "#E0FDEF" : index === 2 ? "#EBF0FF" : "#F6E7FF"
-          }}>
-            <img
-          src={data.icon}
-          alt="alt"
-          
-        />
-        </span>
-        <p>
-          {" "}{data.title}
-        </p>
-      </li>
+      Subject(index, data)
     );
   });
   return (
@@ -83,6 +44,33 @@ function Home() {
   </>
     
   );
+
+
+  function Subject(index: number, data: { title: string; icon: string; questions: { question: string; options: string[]; answer: string; }[]; }) {
+    return <li
+      key={index}
+      onClick={() => {
+        selectQuiz(index);
+      } }
+    >
+
+
+      <span style={{
+        background: index === 0
+          ? "#FFF1E9"
+          : index === 1 ? "#E0FDEF" : index === 2 ? "#EBF0FF" : "#F6E7FF"
+      }}>
+        <img
+          src={data.icon}
+          alt="alt" />
+      </span>
+      <p>
+        {" "}{data.title}
+      </p>
+    </li>;
+  }
 }
 
 export default Home;
+
+

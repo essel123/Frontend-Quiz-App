@@ -200,16 +200,11 @@ input:checked+.slider:before {
 .question p {
   font-size: 36px;
 }
-
-
-
 input[type='range'] {
   -webkit-appearance: none;
   width: 100%;
   background: transparent;
-
 }
-
 input[type='range'] :-webkit-slider-thumb {
   -webkit-appearance: none;
   color: transparent;

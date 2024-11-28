@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { usePersistedState } from "./Functions";
 
 function Mode() {
 
  
-  const [mode, setMode] = useState(() => {
-    const storedMode = localStorage.getItem('mode');
-    return storedMode ? JSON.parse(storedMode) : true; // true means light mode, false means dark mode
-  });
-
+  const [mode, setMode] = usePersistedState('mode',false)
   // Effect to apply the mode when it changes
   useEffect(() => {
-    // Update localStorage when the mode changes
-    localStorage.setItem('mode', JSON.stringify(mode));
-
     // Apply or remove the "dark" class based on mode
     if (mode) {
       document.body.classList.remove('dark'); // Light mode
