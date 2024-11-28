@@ -11,6 +11,11 @@
     --color:#313E51;
     --color_: #626C7F;
     --moon-sun-fill:#626C7F;
+    --desktop:url(/images/pattern-background-desktop-light.svg);
+    --tablet: url(/images/pattern-background-tablet-light.svg);
+    --mobile: url(/images/pattern-background-mobile-light.svg);
+    --shadow: 0 0 4px rgba(186, 186, 186,0.6);
+
 }
 
 .dark{
@@ -19,34 +24,45 @@
     --color:#ffff;
     --color_: #ABC1E1;
     --moon-sun-fill:#FFFFFF;
+    --desktop:url(/images/pattern-background-desktop-dark.svg);
+    --tablet: url(/images/pattern-background-tablet-dark.svg);
+    --mobile: url(/images/pattern-background-mobile-dark.svg);
+    --shadow:'';
+}
+
+ul li {
+    box-shadow: var(--shadow);
 }
 
 
 body{
     background: var(--bg);
+    background-image: var(--desktop);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
 }
 
 
-
-@media (min-width:769px) {
-    body{
-        background-image: url(/images/pattern-background-desktop-light.svg);
-        background-position: center;
-        background-size: cover;
-        height: 100vh;
-    }
-    
-}
 
 @media (max-width:768px) {
     body{
-        background-image: url(/images/pattern-background-tablet-dark.svg);
-        background-position: center;
-        background-size: cover;
-        height: 100vh;
+        background: var(--bg);
+        background-image: var(--tablet);
     }
     
 }
+
+
+
+@media (max-width:450px) {
+    body{
+        background: var(--bg);
+        background-image: var(--mobile);
+    }
+    
+}
+
 
 
 .container{

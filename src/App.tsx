@@ -2,11 +2,13 @@ import './App.css'
 import './index.css'
 
 
-import Home from "./components/Home"
+import Home from "./components/molecules/Home"
+import Mode from './components/atoms/Mode'
 
 function App() {
   return (
-    <div>
+    <div className='page'>
+     <Mode/>
      <Home />
     </div>
   )
