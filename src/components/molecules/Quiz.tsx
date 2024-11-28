@@ -1,30 +1,55 @@
 import Data from "../../assets/data.json";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import QuizCompleted from "./QuizCompleted";
 import QuizName from "../atoms/Quiz-Name";
 import Button from "../atoms/Button";
 import { ErrorMessage } from "../atoms/Error-Message";
 
+
 interface props {
   index: number;
+  
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const usePersistedState = (key: string,value:any) => {
+  const [state, setState] = useState(() => {
+    const storedValue = localStorage.getItem(key);
+    return storedValue ? JSON.parse(storedValue) : value;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(state));
+  }, [state, key]);
+
+  return [state, setState] as const;
+}
+
+
+
 
 function Quiz({ index }: props) {
 
-  const [currentIndex, setcurrentIndex] = useState(0);
+ 
   const [clicked, setclicked] = useState(false);
   // eslint-disable-next-line prefer-const
   let [next, setNext] = useState(false);
   // eslint-disable-next-line prefer-const
   let [selectedindex, setSlectedindex] = useState(-1);
-  const [quizcompleted, setquizcompleted] = useState(false);
-  // eslint-disable-next-line prefer-const
-  let [score, setscore] = useState(0);
+  
+
   // eslint-disable-next-line prefer-const
   let [error, setError] = useState(false);
-  const [progress, setprogress] = useState(10);
+ 
 
+  
+ 
+  const [currentIndex, setcurrentIndex] =  usePersistedState('currentIndex', 0)
+  const  [progress, setprogress] = usePersistedState('progress',10)
+  const [quizcompleted, setquizcompleted] =  usePersistedState('quizcompleted',false);
+  // eslint-disable-next-line prefer-const
+  let [score, setscore] =  usePersistedState('score',0);
   function setquiz() {
     // eslint-disable-next-line prefer-const, react-hooks/rules-of-hooks
     let [answer, showAnswer] = useState(false);
@@ -43,7 +68,7 @@ function Quiz({ index }: props) {
                    
                     <div className="left">
                       <p>
-                        Question {currentIndex + 1} out of 10
+                        Question {currentIndex + 1} out of {quiz.questions.length}
                       </p>
                       <div className="question">
                         <p>
@@ -77,8 +102,8 @@ function Quiz({ index }: props) {
                                     if (
                                       questions.answer.trim() === option.trim()
                                     ) {
-                                      score++;
-                                      setscore(score);
+                                     
+                                      setscore(score+1);
                                     }
                                   }
                                 }}
@@ -153,6 +178,8 @@ function Quiz({ index }: props) {
                                 setcurrentIndex(currentIndex+1);
                                 if (currentIndex === 9) {
                                   setquizcompleted(true);
+                                  
+
                                 }
                               }}    
                            

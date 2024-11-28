@@ -1,7 +1,7 @@
-import { useState } from "react";
-import Home from "./Home";
 import QuizName from "../atoms/Quiz-Name";
 import Button from "../atoms/Button";
+import { useState } from "react";
+import Home from "./Home";
 
 type props = {
   score: number;
@@ -10,17 +10,19 @@ type props = {
 };
 
 function QuizCompleted({ score, img, title }: props) {
-  const [play, setplay] = useState(true);
 
+  const [play, setplay] = useState(true);
   return (
     <div>
-      {play ?
-        <div>
-         <div className="re-position">
-         <QuizName img={img} quiz={title} />
-         </div>
+       
 
-          <div className="completed">
+       {
+        play?<div>
+        <div className="re-position">
+          <QuizName img={img} quiz={title} />
+        </div>
+
+        <div className="completed">
           <div className="left">
             <h6 className="welcome">Quiz completed</h6>
             <h5 className="title">You scored...</h5>
@@ -33,7 +35,7 @@ function QuizCompleted({ score, img, title }: props) {
                   {title}
                 </p>
               </div> */}
-                 <QuizName img={img} quiz={title} />
+              <QuizName img={img} quiz={title} />
               <div className="score">
                 <h1>
                   {score}
@@ -43,14 +45,23 @@ function QuizCompleted({ score, img, title }: props) {
               <p>out of 10</p>
             </div>
 
-            <Button buttonText="Play Again" onclick={()=>{
-               setplay(false);
-               localStorage.setItem('quizIndex',JSON.stringify(-1));
-               localStorage.setItem('startquiz',JSON.stringify(false))
-            }} />
+            <Button
+              buttonText="Play Again"
+              onclick={() => {
+                localStorage.setItem("quizIndex", JSON.stringify(-1));
+                localStorage.setItem("startquiz", JSON.stringify(false));
+                localStorage.setItem("currentIndex", JSON.stringify(0));
+                localStorage.setItem("progress", JSON.stringify(10));
+                localStorage.setItem("quizcompleted", JSON.stringify(false));
+                localStorage.setItem("score", JSON.stringify(0));
+                setplay(false)
+              }}
+              
+            />
           </div>
         </div>
-        </div>:<Home/>}
+      </div>: <Home/>
+       }
     </div>
   );
 }

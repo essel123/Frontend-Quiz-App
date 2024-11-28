@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function Mode() {
 
-  const toggler = document.getElementById('mode')
+ 
   const [mode, setMode] = useState(() => {
     const storedMode = localStorage.getItem('mode');
     return storedMode ? JSON.parse(storedMode) : true; // true means light mode, false means dark mode
@@ -26,7 +26,8 @@ function Mode() {
     setMode(!mode); // Toggle mode between light/dark
   };
   return (
-    <div className="mode">
+     <div className="mode-container">
+      <div className="mode">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -58,6 +59,7 @@ function Mode() {
         <path d="M11.775 4.522A7.5 7.5 0 1 1 4.898 16.09c2.104-.57 4.974-1.953 6.24-5.326.828-2.211.876-4.408.637-6.241ZM20.184 12a8.997 8.997 0 0 0-9.315-8.994.75.75 0 0 0-.713.888c.345 1.821.42 4.092-.424 6.342-1.2 3.201-4.203 4.26-6.115 4.606a.75.75 0 0 0-.542 1.066A9 9 0 0 0 20.184 12Z" />
       </svg>
     </div>
+     </div>
   );
 }
 

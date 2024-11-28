@@ -20,11 +20,7 @@ function Home() {
     return storedIndex ? JSON.parse(storedIndex) : -1; // default to -1 if no value in localStorage
   });
 
-  // Update localStorage whenever startquiz state changes
-  useEffect(() => {
-    localStorage.setItem('startquiz', JSON.stringify(startquiz));
-  }, [startquiz]);
-    
+ 
     useEffect(() => {
       localStorage.setItem('startquiz', JSON.stringify(startquiz));
       localStorage.setItem('quizIndex', JSON.stringify(quizIndex));
