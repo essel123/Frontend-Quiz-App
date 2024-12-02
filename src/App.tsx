@@ -5,6 +5,7 @@ import './index.css'
 import Home from "./components/molecules/Home"
 import Mode from './components/atoms/Mode'
 
+
 function App() {
   return (
     <div className='page'>

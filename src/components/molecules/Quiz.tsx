@@ -13,51 +13,27 @@ interface props {
   
 }
 
-
-// const usePersistedState = (key: string,value:any) => {
-//   const [state, setState] = useState(() => {
-//     const storedValue = localStorage.getItem(key);
-//     return storedValue ? JSON.parse(storedValue) : value;
-//   });
-
-//   useEffect(() => {
-//     localStorage.setItem(key, JSON.stringify(state));
-//   }, [state, key]);
-
-//   return [state, setState] as const;
-// }
-
-
-
-
 function Quiz({ index }: props) {
 
- 
-  const [clicked, setclicked] = useState(false);
-  // eslint-disable-next-line prefer-const
-  let [next, setNext] = useState(false);
-  // eslint-disable-next-line prefer-const
-  let [selectedindex, setSlectedindex] = useState(-1);
-  
+  const [hasClicked, setHasClicked] = usePersistedState('hasClicked', false);
+const [isNext, setIsNext] = usePersistedState('isNext', false);
+// eslint-disable-next-line prefer-const
+let [selectedIndex, setSelectedIndex] = usePersistedState('selectedIndex', -1);
+const [hasError, setHasError] = useState(false);
+const [currentIndex, setCurrentIndex] = usePersistedState('currentIndex', 0);
+const [progressPercentage, setProgressPercentage] = usePersistedState('progressPercentage', 10);
+const [isQuizCompleted, setIsQuizCompleted] = usePersistedState('isQuizCompleted', false);
+const [currentScore, setCurrentScore] = usePersistedState('currentScore', 0);
 
-  // eslint-disable-next-line prefer-const
-  let [error, setError] = useState(false);
- 
 
-  
- 
-  const [currentIndex, setcurrentIndex] =  usePersistedState('currentIndex', 0)
-  const  [progress, setprogress] = usePersistedState('progress',10)
-  const [quizcompleted, setquizcompleted] =  usePersistedState('quizcompleted',false);
-  // eslint-disable-next-line prefer-const
-  let [score, setscore] =  usePersistedState('score',0);
+
   function setquiz() {
     // eslint-disable-next-line prefer-const, react-hooks/rules-of-hooks
-    let [answer, showAnswer] = useState(false);
+    let [answer, showAnswer] = usePersistedState('answer',false);
     const quiz = Data.quizzes.map((quiz, id) => {
       if (id === index) {
-        return quizcompleted
-          ? <QuizCompleted img={quiz.icon} title={quiz.title} score={score} />
+        return isQuizCompleted
+          ? <QuizCompleted img={quiz.icon} title={quiz.title} score={currentScore} />
           : quiz.questions.map((questions, id_) => {
               if (currentIndex === id_) {
                 return (
@@ -78,7 +54,7 @@ function Quiz({ index }: props) {
                         <div className="progress">
                            <div className="progress-bar" style={
                             {
-                                width: `${progress}%`
+                                width: `${progressPercentage}%`
                               
                             }
                            }></div>
@@ -95,49 +71,49 @@ function Quiz({ index }: props) {
                                 className="options"
                                 key={id}
                                 onClick={() => {
-                                  setclicked(true);
-                                  selectedindex = id;
-                                  setSlectedindex(selectedindex);
-                                  setError(false);
-                                  if (selectedindex === id) {
+                                  setHasClicked(true);
+                                  selectedIndex = id;
+                                  setSelectedIndex(selectedIndex);
+                                  setHasError(false);
+                                  if (selectedIndex === id) {
                                     if (
                                       questions.answer.trim() === option.trim()
                                     ) {
                                      
-                                      setscore(score+1);
+                                      setCurrentScore(currentScore+1);
                                     }
                                   }
                                 }}
                                 style={{
-                                  border: `${selectedindex === id
+                                  border: `${selectedIndex === id
                                     ? answer
                                       ? questions.answer.trim() ===
                                         option.trim()
                                         ? "2px solid green"
                                         : "2px solid red"
-                                      : `${clicked ? "2px solid #A729F5" : ""}`
+                                      : `${hasClicked ? "2px solid #A729F5" : ""}`
                                     : ""}`,
 
                                   cursor: "pointer",
 
-                                  pointerEvents: next ? "none" : "auto"
+                                  pointerEvents: isNext ? "none" : "auto"
                                 }}
                               >
                                 <div className="opt">
                                   <div
                                     className="alternatives"
                                     style={{
-                                      background: `${selectedindex === id
+                                      background: `${selectedIndex === id
                                         ? answer
                                           ? questions.answer.trim() ===
                                             option.trim()
-                                            ? "green"
+                                            ? "#26D782"
                                             : "red"
-                                          : `${clicked ? "#A729F5" : ""}`
+                                          : `${hasClicked ? "#A729F5" : ""}`
                                         : ""}`,
 
-                                      color: ` ${selectedindex === id
-                                        ? clicked
+                                      color: ` ${selectedIndex === id
+                                        ? hasClicked
                                           ? "white"
                                           : questions.answer.trim() ===
                                             option.trim()
@@ -170,15 +146,15 @@ function Quiz({ index }: props) {
                       </div>
 
                       <div className="buttons">
-                        {next
+                        {isNext
                           ? <Button buttonText={`${currentIndex === 9?"Finish":"Next Question"}`} onclick={()=>{
-                                setNext(false);
+                                setIsNext(false);
                                 showAnswer(false);
-                                setSlectedindex(-1);
-                                setprogress(progress + 10);
-                                setcurrentIndex(currentIndex+1);
+                                setSelectedIndex(-1);
+                                setProgressPercentage(progressPercentage + 10);
+                                setCurrentIndex(currentIndex+1);
                                 if (currentIndex === 9) {
-                                  setquizcompleted(true);
+                                  setIsQuizCompleted(true);
                                   
 
                                 }
@@ -186,16 +162,16 @@ function Quiz({ index }: props) {
                            
                          />
                           :  <Button buttonText= "Submit Answer" onclick={()=>{
-                            if (selectedindex < 0) {
-                                setError(true);
+                            if (selectedIndex < 0) {
+                                setHasError(true);
                               } else {
-                                setNext(true);
+                                setIsNext(true);
                                 showAnswer(true);
-                                setclicked(false);
+                                setHasClicked(false);
                               }
                           }}/>}
 
-                        {error
+                        {hasError
                           ? <ErrorMessage/>
                           : ""}
                       </div>
