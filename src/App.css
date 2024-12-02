@@ -8,6 +8,7 @@
   align-items: center;
   overflow: hidden;
   box-sizing: border-box;
+  padding: 30px 50px;
   gap: 10px;
   
 }
