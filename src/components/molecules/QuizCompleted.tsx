@@ -19,7 +19,7 @@ function QuizCompleted({ score, img, title }: props) {
        {
         play?<div>
         <div className="re-position">
-          <QuizName img={img} quiz={title} />
+          <QuizName quizicon={img} quiztitle={title} />
         </div>
 
         <div className="completed">
@@ -35,7 +35,7 @@ function QuizCompleted({ score, img, title }: props) {
                   {title}
                 </p>
               </div> */}
-              <QuizName img={img} quiz={title} />
+              <QuizName quizicon={img} quiztitle={title} />
               <div className="score">
                 <h1>
                   {score}

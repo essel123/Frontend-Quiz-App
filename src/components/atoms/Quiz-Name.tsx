@@ -1,14 +1,14 @@
 interface props {
-  img: string;
-  quiz: string;
+  quizicon: string;
+  quiztitle: string;
 }
-function QuizName({ img, quiz }: props) {
+function QuizName({ quizicon, quiztitle }: props) {
   return (
     <div>
       <div className="quiztype">
-        <img src={img} alt="" />
+        <img src={quizicon} alt="" />
         <p>
-          {quiz}
+          {quiztitle}
         </p>
       </div>
     </div>

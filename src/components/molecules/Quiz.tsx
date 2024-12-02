@@ -1,48 +1,47 @@
 import Data from "../../assets/data.json";
 
-import {useState } from "react";
+import { useState } from "react";
 import QuizCompleted from "./QuizCompleted";
 import QuizName from "../atoms/Quiz-Name";
 import Button from "../atoms/Button";
 import { ErrorMessage } from "../atoms/Error-Message";
-import {usePersistedState} from '../atoms/Functions'
-
+import { usePersistedState } from '../atoms/Functions'
 
 interface props {
   index: number;
-  
+
 }
 
 function Quiz({ index }: props) {
 
   const [hasClicked, setHasClicked] = usePersistedState('hasClicked', false);
-const [isNext, setIsNext] = usePersistedState('isNext', false);
-// eslint-disable-next-line prefer-const
-let [selectedIndex, setSelectedIndex] = usePersistedState('selectedIndex', -1);
-const [hasError, setHasError] = useState(false);
-const [currentIndex, setCurrentIndex] = usePersistedState('currentIndex', 0);
-const [progressPercentage, setProgressPercentage] = usePersistedState('progressPercentage', 10);
-const [isQuizCompleted, setIsQuizCompleted] = usePersistedState('isQuizCompleted', false);
-const [currentScore, setCurrentScore] = usePersistedState('currentScore', 0);
+  const [isNext, setIsNext] = usePersistedState('isNext', false);
+  // eslint-disable-next-line prefer-const
+  let [selectedIndex, setSelectedIndex] = usePersistedState('selectedIndex', -1);
+  const [hasError, setHasError] = useState(false);
+  const [currentIndex, setCurrentIndex] = usePersistedState('currentIndex', 0);
+  const [progressPercentage, setProgressPercentage] = usePersistedState('progressPercentage', 10);
+  const [isQuizCompleted, setIsQuizCompleted] = usePersistedState('isQuizCompleted', false);
+  const [currentScore, setCurrentScore] = usePersistedState('currentScore', 0);
 
 
 
   function setquiz() {
     // eslint-disable-next-line prefer-const, react-hooks/rules-of-hooks
-    let [answer, showAnswer] = usePersistedState('answer',false);
+    let [answer, showAnswer] = usePersistedState('answer', false);
     const quiz = Data.quizzes.map((quiz, id) => {
       if (id === index) {
         return isQuizCompleted
           ? <QuizCompleted img={quiz.icon} title={quiz.title} score={currentScore} />
           : quiz.questions.map((questions, id_) => {
-              if (currentIndex === id_) {
-                return (
-                    <>
-                     <div className="re-position">
-                      <QuizName img={quiz.icon} quiz={quiz.title} />
-                    </div>
+            if (currentIndex === id_) {
+              return (
+                <>
+                  <div className="re-position">
+                    <QuizName quizicon={quiz.icon} quiztitle={quiz.title} />
+                  </div>
                   <div className="quiz-content" key={id}>
-                   
+
                     <div className="left">
                       <p>
                         Question {currentIndex + 1} out of {quiz.questions.length}
@@ -52,12 +51,12 @@ const [currentScore, setCurrentScore] = usePersistedState('currentScore', 0);
                           {questions.question}
                         </p>
                         <div className="progress">
-                           <div className="progress-bar" style={
+                          <div className="progress-bar" style={
                             {
-                                width: `${progressPercentage}%`
-                              
+                              width: `${progressPercentage}%`
+
                             }
-                           }></div>
+                          }></div>
                         </div>
                       </div>
                     </div>
@@ -66,7 +65,9 @@ const [currentScore, setCurrentScore] = usePersistedState('currentScore', 0);
                       <div className="options">
                         <ul>
                           {questions.options.map((option, id) => {
+
                             return (
+
                               <li
                                 className="options"
                                 key={id}
@@ -79,8 +80,8 @@ const [currentScore, setCurrentScore] = usePersistedState('currentScore', 0);
                                     if (
                                       questions.answer.trim() === option.trim()
                                     ) {
-                                     
-                                      setCurrentScore(currentScore+1);
+
+                                      setCurrentScore(currentScore + 1);
                                     }
                                   }
                                 }}
@@ -133,54 +134,53 @@ const [currentScore, setCurrentScore] = usePersistedState('currentScore', 0);
                                 {questions.answer.trim() === option.trim()
                                   ? answer
                                     ? <img
-                                        className="answer-check"
-                                        src={"./images/icon-correct.svg"}
-                                        alt=""
-                                      />
+                                      className="answer-check"
+                                      src={"./images/icon-correct.svg"}
+                                      alt=""
+                                    />
                                     : ""
                                   : ""}
-                              </li>
-                            );
+                              </li>)
                           })}
                         </ul>
                       </div>
 
                       <div className="buttons">
                         {isNext
-                          ? <Button buttonText={`${currentIndex === 9?"Finish":"Next Question"}`} onclick={()=>{
-                                setIsNext(false);
-                                showAnswer(false);
-                                setSelectedIndex(-1);
-                                setProgressPercentage(progressPercentage + 10);
-                                setCurrentIndex(currentIndex+1);
-                                if (currentIndex === 9) {
-                                  setIsQuizCompleted(true);
-                                  
+                          ? <Button buttonText={`${currentIndex === 9 ? "Finish" : "Next Question"}`} onclick={() => {
+                            setIsNext(false);
+                            showAnswer(false);
+                            setSelectedIndex(-1);
+                            setProgressPercentage(progressPercentage + 10);
+                            setCurrentIndex(currentIndex + 1);
+                            if (currentIndex === 9) {
+                              setIsQuizCompleted(true);
 
-                                }
-                              }}    
-                           
-                         />
-                          :  <Button buttonText= "Submit Answer" onclick={()=>{
+
+                            }
+                          }}
+
+                          />
+                          : <Button buttonText="Submit Answer" onclick={() => {
                             if (selectedIndex < 0) {
-                                setHasError(true);
-                              } else {
-                                setIsNext(true);
-                                showAnswer(true);
-                                setHasClicked(false);
-                              }
-                          }}/>}
+                              setHasError(true);
+                            } else {
+                              setIsNext(true);
+                              showAnswer(true);
+                              setHasClicked(false);
+                            }
+                          }} />}
 
                         {hasError
-                          ? <ErrorMessage/>
+                          ? <ErrorMessage />
                           : ""}
                       </div>
                     </div>
                   </div>
-                  </>
-                );
-              }
-            });
+                </>
+              );
+            }
+          });
       }
     });
 
@@ -195,3 +195,4 @@ const [currentScore, setCurrentScore] = usePersistedState('currentScore', 0);
 }
 
 export default Quiz;
+

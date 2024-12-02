@@ -8,7 +8,6 @@
   align-items: center;
   overflow: hidden;
   box-sizing: border-box;
-  padding: 30px 50px;
   gap: 10px;
   
 }
@@ -166,7 +165,6 @@ input:checked+.slider:before {
   height: 46px;
   background: #e0dddd;
   border-radius: 5px;
-  box-sizing: border-box;
   padding: 5px;
   display: flex;
   align-items: center;
