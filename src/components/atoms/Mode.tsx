@@ -4,7 +4,7 @@ import { usePersistedState } from "./Functions";
 function Mode() {
 
  
-  const [mode, setMode] = usePersistedState('mode',false)
+  const [mode, setMode] = usePersistedState('mode',true)
   // Effect to apply the mode when it changes
   useEffect(() => {
     // Apply or remove the "dark" class based on mode
