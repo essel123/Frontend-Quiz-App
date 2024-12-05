@@ -41,7 +41,6 @@
 //   // Handle the click event
   
 
-  
 //   return (
 //     <li
 //     key={id}

@@ -10,58 +10,54 @@ type props = {
 };
 
 function QuizCompleted({ score, img, title }: props) {
-
   const [play, setplay] = useState(true);
   return (
     <div>
-       
-
-       {
-        play?<div>
-        <div className="re-position">
-          <QuizName quizicon={img} quiztitle={title} />
-        </div>
-
-        <div className="completed">
-          <div className="left">
-            <h6 className="welcome">Quiz completed</h6>
-            <h5 className="title">You scored...</h5>
-          </div>
-          <div className="right">
-            <div className="container">
-              {/* <div className="quiztype_">
-                <img src={img} alt="alt" />
-                <p>
-                  {title}
-                </p>
-              </div> */}
+      {play
+        ? <div>
+            <div className="re-position">
               <QuizName quizicon={img} quiztitle={title} />
-              <div className="score">
-                <h1>
-                  {score}
-                </h1>
-              </div>
-
-              <p>out of 10</p>
             </div>
 
-            <Button
-              buttonText="Play Again"
-              onclick={() => {
-                localStorage.setItem("quizIndex", JSON.stringify(-1));
-                localStorage.setItem("startquiz", JSON.stringify(false));
-                localStorage.setItem("currentIndex", JSON.stringify(0));
-                localStorage.setItem("progress", JSON.stringify(10));
-                localStorage.setItem("quizcompleted", JSON.stringify(false));
-                localStorage.setItem("score", JSON.stringify(0));
-                setplay(false)
-              }}
-              
-            />
+            <div className="completed">
+              <div className="left">
+                <h6 className="welcome">Quiz completed</h6>
+                <h5 className="title">You scored...</h5>
+              </div>
+              <div className="right">
+                <div className="container">
+                  <QuizName quizicon={img} quiztitle={title} />
+                  <div className="score">
+                    <h1>
+                      {score}
+                    </h1>
+                  </div>
+
+                  <p>out of 10</p>
+                </div>
+
+                <Button
+                  buttonText="Play Again"
+                  onclick={() => {
+                    localStorage.setItem("quizIndex", JSON.stringify(-1));
+                    localStorage.setItem("startquiz", JSON.stringify(false));
+                    localStorage.setItem("currentIndex", JSON.stringify(0));
+                    localStorage.setItem(
+                      "isQuizCompleted",
+                      JSON.stringify(false)
+                    );
+                    localStorage.setItem("score", JSON.stringify(0));
+                    localStorage.setItem(
+                      "progressPercentage",
+                      JSON.stringify(10)
+                    );
+                    setplay(false);
+                  }}
+                />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>: <Home/>
-       }
+        : <Home />}
     </div>
   );
 }

@@ -1,33 +1,33 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 
-:root{
-    --bg:#F4F6FA;
-    --bg-items:#FFFFFF;
-    --color:#313E51;
+:root {
+    --bg: #F4F6FA;
+    --bg-items: #FFFFFF;
+    --color: #313E51;
     --color_: #626C7F;
-    --moon-sun-fill:#626C7F;
-    --desktop:url(/images/pattern-background-desktop-light.svg);
+    --moon-sun-fill: #626C7F;
+    --desktop: url(/images/pattern-background-desktop-light.svg);
     --tablet: url(/images/pattern-background-tablet-light.svg);
     --mobile: url(/images/pattern-background-mobile-light.svg);
-    --shadow: 0 0 4px rgba(186, 186, 186,0.6);
+    --shadow: 0 0 4px rgba(186, 186, 186, 0.6);
 
 }
 
-.dark{
-    --bg:#313E51;
-    --bg-items:#3B4D66;
-    --color:#ffff;
+.dark {
+    --bg: #313E51;
+    --bg-items: #3B4D66;
+    --color: #ffff;
     --color_: #ABC1E1;
-    --moon-sun-fill:#FFFFFF;
-    --desktop:url(/images/pattern-background-desktop-dark.svg);
+    --moon-sun-fill: #FFFFFF;
+    --desktop: url(/images/pattern-background-desktop-dark.svg);
     --tablet: url(/images/pattern-background-tablet-dark.svg);
     --mobile: url(/images/pattern-background-mobile-dark.svg);
-    --shadow:'';
+    --shadow: '';
 }
 
 ul li {
@@ -35,7 +35,7 @@ ul li {
 }
 
 
-body{
+body {
     background: var(--bg);
     background-image: var(--desktop);
     background-position: center;
@@ -46,65 +46,65 @@ body{
 
 
 @media (max-width:768px) {
-    body{
+    body {
         background: var(--bg);
         background-image: var(--tablet);
     }
-    
+
 }
 
 
 
 @media (max-width:450px) {
-    body{
+    body {
         background: var(--bg);
         background-image: var(--mobile);
     }
-    
+
 }
 
 
 
-.container{
+.container {
     padding: 10px;
-    background:var(--bg-items);
+    background: var(--bg-items);
 
     color: var(--color);
-   
-    
+
+
 }
 
 ul li {
     background: var(--bg-items);
-    
+
 }
 
 
 
-ul li  p,.left h5,.left h6{
+ul li p, .left h5, .left h6 {
     color: var(--color);
 }
 
-.left p{
+.left p {
     color: var(--color_);
 }
 
-.question p{
+.question p {
     color: var(--color);
 }
 
-.moon path{
+.moon path {
     fill: var(--moon-sun-fill);
 }
 
-.sun path{
+.sun path {
     fill: var(--moon-sun-fill);
 }
 
-.progress{
+.progress {
     background: var(--bg-items);
 }
 
-.quiztype p{
+.quiztype p {
     color: var(--color);
 }
