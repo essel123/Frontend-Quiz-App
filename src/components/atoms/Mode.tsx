@@ -6,19 +6,18 @@ function Mode() {
   // Effect to apply the mode when it changes
   useEffect(
     () => {
-      // Apply or remove the "dark" class based on mode
       if (mode) {
-        document.body.classList.remove("dark"); // Light mode
+        document.body.classList.remove("dark");
       } else {
-        document.body.classList.add("dark"); // Dark mode
+        document.body.classList.add("dark");
       }
     },
     [mode]
-  ); // Only run the effect when mode changes
+  );
 
   // Function to toggle the mode
   const modeToggler = () => {
-    setMode(!mode); // Toggle mode between light/dark
+    setMode(!mode);
   };
   return (
     <div className="mode-container">

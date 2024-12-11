@@ -16,8 +16,8 @@ function Quiz({ index }: props) {
 
   const [hasClicked, setHasClicked] = usePersistedState('hasClicked', false);
   const [isNext, setIsNext] = usePersistedState('isNext', false);
-  // eslint-disable-next-line prefer-const
-  let [selectedIndex, setSelectedIndex] = usePersistedState('selectedIndex', -1);
+  
+  const [selectedIndex, setSelectedIndex] = usePersistedState('selectedIndex', -1);
   const [hasError, setHasError] = useState(false);
   const [currentIndex, setCurrentIndex] = usePersistedState('currentIndex', 0);
   const [progressPercentage, setProgressPercentage] = usePersistedState('progressPercentage', 10);
@@ -27,12 +27,13 @@ function Quiz({ index }: props) {
 
 
   function setquiz() {
-    // eslint-disable-next-line prefer-const, react-hooks/rules-of-hooks
-    let [answer, showAnswer] = usePersistedState('answer', false);
+    
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [answer, showAnswer] = usePersistedState('answer', false);
     const quiz = Data.quizzes.map((quiz, id) => {
       if (id === index) {
         return isQuizCompleted
-          ? <QuizCompleted img={quiz.icon} title={quiz.title} score={currentScore} />
+          ? <QuizCompleted img={quiz.icon} title={quiz.title} totalNumberOfQuestions={quiz.questions.length} score={currentScore} />
           : quiz.questions.map((questions, id_) => {
             if (currentIndex === id_) {
               return (
@@ -73,8 +74,8 @@ function Quiz({ index }: props) {
                                 key={id}
                                 onClick={() => {
                                   setHasClicked(true);
-                                  selectedIndex = id;
-                                  setSelectedIndex(selectedIndex);
+                                 ;
+                                  setSelectedIndex(id);
                                   setHasError(false);
                                   if (selectedIndex === id) {
                                     if (

@@ -7,10 +7,21 @@ type props = {
   score: number;
   img: string;
   title: string;
+  totalNumberOfQuestions: number;
 };
 
-function QuizCompleted({ score, img, title }: props) {
+function QuizCompleted({ score, img, title, totalNumberOfQuestions }: props) {
   const [play, setplay] = useState(true);
+
+  const handleclick = () => {
+    localStorage.setItem("quizIndex", JSON.stringify(-1));
+    localStorage.setItem("startquiz", JSON.stringify(false));
+    localStorage.setItem("currentIndex", JSON.stringify(0));
+    localStorage.setItem("isQuizCompleted", JSON.stringify(false));
+    localStorage.setItem("score", JSON.stringify(0));
+    localStorage.setItem("progressPercentage", JSON.stringify(10));
+    setplay(false);
+  };
   return (
     <div>
       {play
@@ -32,28 +43,11 @@ function QuizCompleted({ score, img, title }: props) {
                       {score}
                     </h1>
                   </div>
-
-                  <p>out of 10</p>
+                  <p>
+                    out of {totalNumberOfQuestions}
+                  </p>
                 </div>
-
-                <Button
-                  buttonText="Play Again"
-                  onclick={() => {
-                    localStorage.setItem("quizIndex", JSON.stringify(-1));
-                    localStorage.setItem("startquiz", JSON.stringify(false));
-                    localStorage.setItem("currentIndex", JSON.stringify(0));
-                    localStorage.setItem(
-                      "isQuizCompleted",
-                      JSON.stringify(false)
-                    );
-                    localStorage.setItem("score", JSON.stringify(0));
-                    localStorage.setItem(
-                      "progressPercentage",
-                      JSON.stringify(10)
-                    );
-                    setplay(false);
-                  }}
-                />
+                <Button buttonText="Play Again" onclick={() => handleclick()} />
               </div>
             </div>
           </div>
