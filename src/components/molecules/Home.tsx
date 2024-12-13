@@ -6,8 +6,6 @@ import { usePersistedState } from '../atoms/Functions'
 function Home() {
   const [startquiz, setStartQuiz] = usePersistedState('startquiz', false)
   const [quizIndex, setQuizIndex] = usePersistedState('quizIndex', -1)
-
-
   function selectQuiz(index: number) {
     setStartQuiz(!startquiz)
     setQuizIndex(index)
@@ -50,8 +48,7 @@ function Home() {
     >
 
 
-      <span className={index===1?'':index===1?'':index===2?'':''}
-      
+      <span
       style={{
         background: index === 0
           ? "#FFF1E9"
