@@ -2,9 +2,9 @@ import Data from "../../assets/data.json";
 
 import { useState } from "react";
 import QuizCompleted from "./QuizCompleted";
-import QuizName from "../atoms/Quiz-Name";
-import Button from "../atoms/Button";
-import { ErrorMessage } from "../atoms/Error-Message";
+import QuizName from "../atoms/QuizName/Quiz-Name";
+import Button from "../atoms/Button/Button";
+import { ErrorMessage } from "../atoms/Error-message/Error-Message";
 import { usePersistedState } from '../atoms/Functions'
 
 interface props {

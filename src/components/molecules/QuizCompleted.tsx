@@ -1,7 +1,7 @@
-import QuizName from "../atoms/Quiz-Name";
-import Button from "../atoms/Button";
+import QuizName from "../atoms/QuizName/Quiz-Name";
+import Button from "../atoms/Button/Button";
 import { useState } from "react";
-import Home from "./Home";
+import Home from "./Home/Home";
 
 type props = {
   score: number;

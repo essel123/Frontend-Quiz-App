@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { usePersistedState } from "./Functions";
+import { usePersistedState } from "../Functions";
 
 function Mode() {
   const [mode, setMode] = usePersistedState("mode", true);

@@ -1,8 +1,8 @@
 import "./App.css";
 import "./index.css";
 
-import Home from "./components/molecules/Home";
-import Mode from "./components/atoms/Mode";
+import Home from "./components/molecules/Home/Home";
+import Mode from "./components/atoms/Mode/Mode";
 
 function App() {
   return (

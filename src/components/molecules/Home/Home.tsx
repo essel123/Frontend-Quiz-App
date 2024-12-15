@@ -1,6 +1,6 @@
-import Data from "../../assets/data.json";
-import Quiz from './Quiz'
-import { usePersistedState } from '../atoms/Functions'
+import Data from "../../../assets/data.json";
+import Quiz from '../Quiz'
+import { usePersistedState } from '../../atoms/Functions'
 
 
 function Home() {
